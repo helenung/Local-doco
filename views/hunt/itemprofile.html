@@ -32,7 +32,12 @@
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut ullamcorper orci. Sed pellentesque sapien ut nibh eleifend cursus.</p> -->
 		</div>
 
-		<div class="takePicButton">TAKE PICTURE<input id="input" type="file" accept="image/*" capture="camera"></div>
+		<div class="takePicButton"><span>TAKE PICTURE</span><input id="input" type="file" accept="image/*" capture="camera"></div>
+
+		<div id="successPage">
+			+10<br>
+			<i id="thumbsUp" class="fa fa-thumbs-up"></i>
+		</div>
 	</body>
 	<script>
 		var inputElement = document.getElementById("input");
@@ -64,6 +69,7 @@
 			    })	
 			};
 
+			console.log(selectedFile);
 			reader.readAsDataURL(selectedFile); 
 		}
 
@@ -87,9 +93,21 @@
 		    	}
 		    }
 		    if(found){
-		    	alert("You successfully found a " + targetKeyword);
+		    	$("#successPage").css('display','block');
+		    	$( "#successPage" ).animate({
+				    fontSize: '100pt'
+				  }, 800, function() {
+				    // Animation complete.
+				  });
+		    	setTimeout(function(){
+		    		location.href = location.href.replace('/itemprofile.html','') + "/itemList.html";
+		    	},800);
 		    } else {
-		    	alert("Not found");
+		    	$(".takePicButton").css('letter-spacing','1px');
+		    	$(".takePicButton").css('line-height','10vh');
+		    	$(".takePicButton").css('background-color','#e74c3c');
+		    	$(".takePicButton span").html("Picture not qualified :(<br>Tap to re-take photo");
+		    	
 		    }
 	    }
 	</script>
