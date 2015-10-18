@@ -64,34 +64,34 @@
     });
   }
 
+  function getItemNamesFromHuntId(id) {
+    var names = [];
+    db.child('hunts').child(id).child('items').once('value', function(snapshot) {
+      var items = snapshot.val();
+      for (var i = 0; i < items.length; i++) {
+        names.push(items[i].name);
+      }
+    });
+    return names;
+  }
+
   function getHunts(userId) {
     db.child('users').child(userId).child('hunts').once('value', function(snapshot) {
       huntIds = snapshot.val();
       // Array of {id: id, items: [{name: 'abc', description: 'abcde'}]}
-      var huntsRef = db.child('hunts');
-      var itemsRef = db.child('items');
       for (var key in huntIds) {
         if (huntIds.hasOwnProperty(key)) {
           // Lookup the item ids from hunts table
-          huntsRef.child(key).once('value', function(snapshot) {
-            var itemIds = snapshot.val().items;
-            var items = []
-            for (var i = 0; i < itemIds.length; i++) {
-              itemsRef.child(itemIds[i]).once('value', function(snapshot) {
-                items.push(snapshot.val());
-              });
-            }
-            HUNTS.push({
-              id: key,
-              items: items
-            });
+          var items = getItemNamesFromHuntId(key);
+          HUNTS.push({
+            id: key,
+            items: items
           });
         }
       }
+      renderHunts();
     });
   }
-
-  count = 1;
 
   function addItem() {
     count++;
@@ -99,6 +99,16 @@
         .attr("placeholder", "Item " + count)
         .attr("class", "item").attr("size", "75"));
     console.log($(".item"));
+  }
+
+  function clearForm() {
+    $('#huntName').val('');
+    $('#desc').val('');
+    $('.item').val('');
+  }
+
+  function renderHunts() {
+    console.log(HUNTS);
   }
 
   function addHunt() {
@@ -111,8 +121,9 @@
     }
     var huntsRef = db.child('hunts').push();
     huntsRef.set({name: huntName, items: itemNames});
-    debugger;
     db.child('users').child(USER_ID).child('hunts').child(huntsRef.key()).set({set: true});
+    clearForm();
+    renderHunts();
   }
 
 })();
