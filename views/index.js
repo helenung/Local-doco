@@ -86,7 +86,7 @@
 
     function addItem() {
         var itemInput = $("<input>").attr("type", "text").attr("placeholder", "Item").addClass("itemInput");
-        var scoreInput = $("<input>").attr("type", "number").attr("placeholder", "score").addClass("subInput");
+        var scoreInput = $("<input>").attr("type", "number").attr("placeholder", "score").addClass("scoreInput");
         var descInput = $("<input>").attr("type", "text").attr("placeholder", "description").addClass("subInput");
         $("#dynamicInput").append(itemInput).append(scoreInput).append(descInput);
         // getHunts(USER_ID);
@@ -95,6 +95,7 @@
     function clearForm() {
         $('#huntName').val('');
         $('#desc').val('');
+        $('.scoreInput').val('');
         $('.subInput').val('');
         $('.itemInput').val('');
     }
@@ -128,10 +129,14 @@
         var huntName = $("#huntName").val();
         var desc = $("#desc").val();
         var items = $(".itemInput");
+        var scores = $('.scoreInput');
         console.log("all items: " + items);
-        var itemNames = [];
+        var itemObjs = [];
         for (var i = 0; i < items.length; i++) {
-          itemNames.push(items.eq(i).val());
+          itemObjs.push({
+            name: items.eq(i).val(),
+            score: scores.eq(i).val()
+          });
         };
         // for (var i = 0; i < items.length; i++) {
         //   itemNames.push(items.eq(i).val());
@@ -139,7 +144,7 @@
         var huntsRef = db.child('hunts').push();
         huntsRef.set({
             "name": huntName,
-            "items": itemNames
+            "items": itemObjs
         });
         db.child('users').child(USER_ID).child('hunts').child(huntsRef.key()).set({
             set: true
