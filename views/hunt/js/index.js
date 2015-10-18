@@ -17,8 +17,6 @@
       
     }
 
-    
-
     $( document ).ready(function() {
       // Handler for .ready() called.
       var url = window.location.href.split("?");

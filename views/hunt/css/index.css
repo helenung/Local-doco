@@ -2,17 +2,7 @@ body {
 	background: url('../img/bg.jpeg') no-repeat center center fixed;
 	background-size: cover;
 	color: white;
-	margin-top: 0px;
-	
-}
-
-@media screen and (max-width: 500px) {
-    .logo {
-        width: 15em;
-        text-align: center;
-        margin: 0 auto;
-        margin-top: 0px;
-    }
+	margin-top: 0px;	
 }
 
 #huntName {
@@ -20,10 +10,10 @@ body {
 }
 
 .logo {
-    width: 35em;
+    width: 50vw;
     text-align: center;
     margin: 0 auto;
-    margin-top: 0px;
+    margin-top: 40px;
 }
 
 h1,h3,span {
@@ -33,12 +23,6 @@ h1,h3,span {
 
 h3 {
 	font-size: 10pt;
-}
-
-.timer {
-	display: block;
-	margin-top: 20px;
-	font-size: 16pt;
 }
 
 p {
