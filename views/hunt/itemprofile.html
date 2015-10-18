@@ -86,7 +86,7 @@
 	        itemIndex = urlVariables[2];
 	        itemName = urlVariables[3];
 	        earned = urlVariables[4];
-	        
+
 	    	console.log($("#topTitle").html());
 	    	console.log(results);
 	    	// Go through classes (keywords) and see if any match with our key word
@@ -116,7 +116,8 @@
 				    // Animation complete.
 				  });
 		    	setTimeout(function(){
-		    		location.href = location.href.replace('/itemprofile.html','') + "/itemList.html";
+		    		var newLocation = location.href.split("itemprofile.html")[0] + "itemList.html?random=" + huntId + ":qw:" + teamName;
+            			location.href = newLocation;
 		    	},600);
 		    } else {
 		    	$(".takePicButton").css('letter-spacing','1px');
