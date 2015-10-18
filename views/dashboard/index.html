@@ -16,6 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="../index.js" type="text/javascript"></script>
 
+
       <title>Local Doco</title>
    </head>
      <link rel="stylesheet" type="text/css" href="../css/styles.css" media="screen" />
@@ -34,6 +35,22 @@
       to create a new adventure.</h3>
       <button class="login" id="login" type="button">Log in with <img class="fb" src="../img/fb.png"></button>
 
+    </div>
+
+    <div id="create">
+      <div class="title">
+        <h3>Create a new adventure for others</h3>
+      </div>
+      <div class="form">
+          <form>
+            <input type="text" id="huntName" placeholder="Hunt Name" />
+            <input type="text" id="desc" size="75" placeholder="Description" />
+            <div id="dynamicInput">
+            <br><input type="text" class="item" size="75" placeholder="Item 1">
+            <input class="addMore" id="addItem" type="button" value="Add More Items">
+            </div>  <input class="create" type="submit" id="submitHunt" value="Create" />
+          </form>
+      </div>
     </div>
 
     <div id="huntsList">

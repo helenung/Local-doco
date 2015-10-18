@@ -5,12 +5,14 @@
   var USER_ID = '';
 
   $(function() {
+    
     $("#huntsList").hide();
     $("#cssmenu").hide();
+    $("#create").hide();
     $("#login").click(function() {
       console.log('clicked');
       login();
-    });
+   });
   }); 
 
   function login() {
@@ -23,14 +25,16 @@
         var id = authData.uid.substring(9);
         USER_ID = id;
         checkIfUserExists(id);
-        addHunt([{
-          name: 'apple',
-          description: 'a fucking apple'
-        }]);
+
+        $("#submitHunt").click(addHunt);
+
         getHunts(id);
         $(".signin").hide();
         $("#huntsList").show();
         $("#cssmenu").show();
+        $("#create").show();
+        $("#addItem").click(addItem);
+
       }
     });
   };
@@ -55,23 +59,61 @@
 
   function getHunts(userId) {
     db.child('users').child(userId).child('hunts').once('value', function(snapshot) {
-      console.log(snapshot.val());
+      huntIds = snapshot.val();
+      // Array of {id: id, items: [{name: 'abc', description: 'abcde'}]}
+      var huntsRef = db.child('hunts');
+      var itemsRef = db.child('items');
+      for (var key in huntIds) {
+        if (huntIds.hasOwnProperty(key)) {
+          // Lookup the item ids from hunts table
+          huntsRef.child(key).once('value', function(snapshot) {
+            var itemIds = snapshot.val().items;
+            var items = []
+            for (var i = 0; i < itemIds.length; i++) {
+              itemsRef.child(itemIds[i]).once('value', function(snapshot) {
+                items.push(snapshot.val());
+              });
+            }
+            HUNTS.push({
+              id: key,
+              items: items
+            });
+          });
+        }
+      }
     });
+  }
+
+  count = 1;
+
+  function addItem() {
+    console.log("fuck u");
+    count++;
+    $("#dynamicInput").append($("<input>").attr("type", "text")
+        .attr("placeholder", "Item " + count)
+        .attr("class", "item").attr("size", "75"));
+    console.log($(".item"));
   }
 
   // Store huntid: [itemids...] and itemid: {name: 'abc', description: 'abcde'}
   // items should be array of {name: 'abc', description: 'abcde'}
-  function addHunt(items) {
+  function addHunt() {
+    var huntName = $("#huntName").val();
+    var desc = $("#desc").val();
+    var items = $(".item");
     var itemsRef = db.child('items');
     var itemIds = [];
+    items.forEach(function(e) {
+      itemsId.push(e.val());
+    });
     for (var i = 0; i < items.length; i++) {
       var newItemRef = itemsRef.push();
-      newItemRef.set(items[i]);
+      newItemRef.set({"name": items[i].val()});
       itemIds.push(newItemRef.key());
     }
     var huntsRef = db.child('hunts').push();
     huntsRef.set({items: itemIds});
-    db.child('users').child(USER_ID).child('hunts').push({id: huntsRef.key()});
+    db.child('users').child(USER_ID).child('hunts').child(huntsRef.key()).set({set: true});
   }
 
 })();
