@@ -129,14 +129,10 @@
         var huntName = $("#huntName").val();
         var desc = $("#desc").val();
         var items = $(".itemInput");
-        var scores = $('.scoreInput');
         console.log("all items: " + items);
-        var itemObjs = [];
+        var itemNames = [];
         for (var i = 0; i < items.length; i++) {
-          itemObjs.push({
-            name: items.eq(i).val(),
-            score: scores.eq(i).val()
-          });
+          itemNames.push(items.eq(i).val());
         };
         // for (var i = 0; i < items.length; i++) {
         //   itemNames.push(items.eq(i).val());
@@ -144,7 +140,7 @@
         var huntsRef = db.child('hunts').push();
         huntsRef.set({
             "name": huntName,
-            "items": itemObjs
+            "items": itemNames
         });
         db.child('users').child(USER_ID).child('hunts').child(huntsRef.key()).set({
             set: true
