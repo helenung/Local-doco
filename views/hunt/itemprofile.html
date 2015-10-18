@@ -32,6 +32,65 @@
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut ullamcorper orci. Sed pellentesque sapien ut nibh eleifend cursus.</p> -->
 		</div>
 
-		<div class="takePicButton">TAKE PICTURE<input id="pictureUpload" type="file" accept="image/*" capture="camera"></div>
+		<div class="takePicButton">TAKE PICTURE<input id="input" type="file" accept="image/*" capture="camera"></div>
 	</body>
+	<script>
+		var inputElement = document.getElementById("input");
+		inputElement.addEventListener("change", handleFiles, false);
+		function handleFiles() {
+			var selectedFile = document.getElementById('input').files[0];
+			var reader  = new FileReader();
+
+			reader.onload = function(fileLoadedEvent) {
+				console.log(fileLoadedEvent.target.result);
+		//22
+				var data = {
+		    		'encoded_data': fileLoadedEvent.target.result.substring(22)
+				}
+
+				$.ajax(
+			        {
+			            'type': 'POST',
+			            'contentType': 'application/json; charset=utf-8',
+			            	'processData': false,
+			            'url': 'https://api.clarifai.com/v1/tag/',
+			            'data':JSON.stringify(data),
+			            'headers': {
+			                'Authorization': 'Bearer ' + 'QkiJkiLeCyumAdjlTMsKL9D5Ppriuu'
+			            }
+			        }  
+			    ).done(function(json){
+			        processResults(json);
+			    })	
+			};
+
+			reader.readAsDataURL(selectedFile); 
+		}
+
+		function processResults(results){
+	    	console.log($("#topTitle").html());
+	    	console.log(results);
+	    	// Go through classes (keywords) and see if any match with our key word
+	    	// If they do, store the index then search through the prob for that index's prob
+		    	// if that prob is above 70%, confirm
+		    	// if not, don't confirm
+		    // If they dont, unconfirm
+		    var targetKeyword = $("#topTitle").html();
+		    var keywords = results.results[0].result.tag.classes;
+		    var probabilities = results.results[0].result.tag.probs;
+		    var found = false;
+		    for(var i = 0; i < keywords.length;i++){
+		    	if(keywords[i] == targetKeyword.toLowerCase()){
+		    		if(probabilities[i] > 0.7){
+		    			found = true;
+		    		}
+		    	}
+		    }
+		    if(found){
+		    	alert("You successfully found a " + targetKeyword);
+		    } else {
+		    	alert("Not found");
+		    }
+	    }
+	</script>
 </html>
