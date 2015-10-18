@@ -13,7 +13,7 @@ var app = express();
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, 'views'));
 // HTML files are stored in /views
-app.use(express.static(__dirname + '/views'));
+app.use(express.static(path.join(__dirname, '/views')));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -21,19 +21,20 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function(req, res, next) {
+/*app.get('/', function(req, res, next) {
   res.sendfile('index.html');
 });
 
-app.get('/feed', function(req, res, next) {
+app.get('/dashboard', function(req, res, next) {
   res.sendfile('dashboard/index.html');
-})
-
-app.get('/feed', function(req, res, next) {
-  res.sendfile('feed/index.html');
 });
+
+app.get('/feed/:id', function(req, res, next) {
+  var huntId = req.params.id;
+  //res.send(__dirname + '/views/feed/index.html?huntId=' + huntId);
+  res.sendfile('./views/feed/index.html?huntId=' + huntId);
+});*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
