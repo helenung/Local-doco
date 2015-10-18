@@ -1,0 +1,54 @@
+<html>
+<head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+</head>
+<body>
+<input type="file" id="input" accept="image/*;capture=camera">
+<script>
+	 
+
+	 var inputElement = document.getElementById("input");
+inputElement.addEventListener("change", handleFiles, false);
+function handleFiles() {
+	var selectedFile = document.getElementById('input').files[0];
+	var reader  = new FileReader();
+
+	reader.onload = function(fileLoadedEvent) 
+		{
+			console.log(fileLoadedEvent.target.result);
+//22
+			var data = {
+        		'encoded_data': fileLoadedEvent.target.result.substring(22)
+    		}
+
+    		$.ajax(
+		        {
+		            'type': 'POST',
+		            'contentType': 'application/json; charset=utf-8',
+		            	'processData': false,
+		            'url': 'https://api.clarifai.com/v1/tag/',
+		            'data':JSON.stringify(data),
+		            'headers': {
+		                'Authorization': 'Bearer ' + 'a7iQNdIYfIwJluXPotznUPqkiI1JpF'
+		            }
+		        }  
+		    ).done(
+		        function(json){
+		            console.log(json);
+		        }
+		    )
+			
+		};
+
+		reader.readAsDataURL(selectedFile);
+	
+	 
+}
+	
+
+ 
+
+</script>
+</body>
+</html>
