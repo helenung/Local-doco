@@ -41,6 +41,18 @@
 		</div>
 	</body>
 	<script>
+		var db = new Firebase('https://local-doco.firebaseio.com');
+        var url = window.location.href.split("?");
+        var params = url && url[1] ? url[1].split("=") : null;
+        temp = params && params[1] ? params[1] : null;
+
+        var urlVariables = temp.split(":qw:");
+        huntId = urlVariables[0];
+        teamName = urlVariables[1];
+        itemIndex = urlVariables[2];
+        itemName = urlVariables[3];
+        earned = urlVariables[4];
+
 		var inputElement = document.getElementById("input");
 		inputElement.addEventListener("change", handleFiles, false);
 		function handleFiles() {
@@ -50,6 +62,9 @@
 			reader.onload = function(fileLoadedEvent) {
 				console.log(fileLoadedEvent.target.result);
 		//22
+		db.child("hunts").child(huntId).child("teams").child(teamName).child('pics').set({
+               [itemIndex]: fileLoadedEvent.target.result
+              });
 				var data = {
 		    		'encoded_data': fileLoadedEvent.target.result.substring(22)
 				}
@@ -75,17 +90,7 @@
 		}
 
 		function processResults(results){
-			var db = new Firebase('https://local-doco.firebaseio.com');
-	        var url = window.location.href.split("?");
-	        var params = url && url[1] ? url[1].split("=") : null;
-	        temp = params && params[1] ? params[1] : null;
-
-	        var urlVariables = temp.split(":qw:");
-	        huntId = urlVariables[0];
-	        teamName = urlVariables[1];
-	        itemIndex = urlVariables[2];
-	        itemName = urlVariables[3];
-	        earned = urlVariables[4];
+			
 
 	    	console.log($("#topTitle").html());
 	    	console.log(results);
