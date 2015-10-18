@@ -9,28 +9,46 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="/wp-includes/js/addInput.js" language="Javascript" type="text/javascript"></script>
       <title>Local Doco</title>
    </head>
      <link rel="stylesheet" type="text/css" href="../css/styles.css" media="screen" />
  
-   <body>
+   <body id="bg-add">
     <div id='cssmenu'>
       <ul>
          <li class='last'><a href='#'><span>HUNTS</span></a></li>
          <li class='active'><a href='#'><span>ADD</span></a></li>
       </ul>
     </div>
+      
       <div class="title">
-        <h2>Create a new adventure for others</h2>
+        <h3>Create a new adventure for others</h3>
       </div>
       <div class="form">
           <form>
           <input type="text" placeholder="Hunt Name" />
           <input type="text" size="75" placeholder="Description" />
-          <input type="submit" value="Add" />
+          <div id="dynamicInput">
+          <br><input type="text" size="75" placeholder="Item 1" name="myInputs[]">
+     
+     <input class="addMore" type="button" value="Add More Items" onClick="addInput('dynamicInput');">
+        </div>  <input class="create" type="submit" value="Create" />
         </form>
       </div>
-    
-     
    </body>
+   <script type="text/javascript">
+   var counter = 1;
+var limit = 20;
+function addInput(divName){
+     if (counter == limit)  {
+          alert("You have reached the limit of adding " + counter + " inputs");
+     }
+     else {
+          var newdiv = document.createElement('div');
+          newdiv.innerHTML = "<br><input type='text' size='75' placeholder='Item " + (counter + 1) + "' name='myInputs[]'>";
+          document.getElementById(divName).appendChild(newdiv);
+          counter++;
+     }
+}</script>
 </html>
