@@ -1,9 +1,18 @@
 (function() {
+
 	$(function() {
-    	console.log( "ready!" );
-    	loadLeaderboard();
-    	loadFeed();
+    	var url = window.location.href.split("?");
+    	var params = url && url[1] ? url[1].split("=") : null;
+    	var huntId = params && params[1] ? params[1] : null;
+
+    	if (url && params && huntId) {
+	    	loadFeed(huntId);
+	    	loadLeaderboard(huntId);
+	    	console.log(huntId);
+	    }
 	});
+
+	
 
 	var items = {
 		"1": "friends at dubHacks"
@@ -14,8 +23,8 @@
 		"2": "sum loser team"
 	}
 
-	function loadLeaderboard(huntId) {
-		//var leaders = getScores(huntId);
+	function loadLeaderboard(id) {
+		//var leaders = getScores(id);
 		var leaders = [{
 			"score": 10,
 			"teamId": 1,
@@ -36,8 +45,8 @@
 		$("#leaderboard").append(list);
 	}
 
-	function loadFeed(huntId) {
-		//var submissions = getHistory(huntId, 10);
+	function loadFeed(id) {
+		//var submissions = getHistory(id, 10);
 		var submissions = [{
 			"itemId": 1,
 			"teamId": 1,
@@ -47,7 +56,6 @@
 			"teamId": 2,
 			"imageURL": "https://scontent.xx.fbcdn.net/hphotos-xpt1/v/t1.0-9/12112104_10153256723648741_5486616484579004564_n.jpg?oh=af4e2fb781fbad38633a71ea84172626&oe=56BED77F"
 		}];
-
 
 		submissions.forEach(function(submission) {
 			var moment = $("<div>");
