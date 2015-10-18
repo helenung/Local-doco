@@ -266,7 +266,7 @@ form {
     color: #FFF;
     vertical-align: top;
 }
-@media screen and (max-width: 500px) {
+@media handheld, screen and (max-width: 500px) {
     .logo {
         width: 20em;
         text-align: center;
