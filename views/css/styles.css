@@ -1,10 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,600);
-#bg-add {
-    background-image: url("https://images.unsplash.com/photo-1424746219973-8fe3bd07d8e3?q=80&fm=jpg&s=69c2c4804c5892bd8f882afa7ee4e003");
-    background-size: cover;
+body {
+  background-size: cover;
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     color: #FFF;
+}
+#bg-add {
+    background-image: url("https://images.unsplash.com/photo-1424746219973-8fe3bd07d8e3?q=80&fm=jpg&s=69c2c4804c5892bd8f882afa7ee4e003");
+}
+#bg-land {
+  background-image: url("https://images.unsplash.com/photo-1440964829947-ca3277bd37f8?q=80&fm=jpg&s=820fcc9dd26c0ede80f3b1663c543965");
 }
 
 #bg-dash {
@@ -15,6 +20,46 @@ h3, h1, h2 {
   font-weight: 300;
 
 }
+
+.signin {
+  background-color: rgba(236, 240, 241, 0.3);
+  margin: 0 auto;
+    width: 35%;
+    padding: 1em;
+    margin-top: 15%;
+}
+
+button {
+  background-color: #2ECC71;
+  color: #FFF;
+  outline: none;
+  border:none;
+  font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    padding: .5em;
+    font-size: 110%;
+
+}
+
+.fb {
+  width: 20%;
+}
+
+footer {
+  bottom:0;
+    position:absolute;
+  width:100%;
+  background-color: #2ECC71;
+  margin: -2em -.5em -.5em -.5em;
+  padding: 0 0 0 1em;
+}
+
+.logo {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
 
 .header, #cssmenu {
   background-color: #27AE60;
@@ -70,7 +115,9 @@ h3, h1, h2 {
 ul#rounded-list{
   list-style-type: none;
   margin: 4em 0 0 -.5em;
+}
 
+ul#rounded-list, .signin {
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 2s; /* Firefox < 16 */
         -ms-animation: fadein 2s; /* Internet Explorer */
@@ -160,24 +207,33 @@ ul#rounded-list{
     width: 55%;
     padding: 1em;
     background-color: rgba(52, 73, 94, 0.75);
+
   }
 
 textarea {
   color: #7F8C8D;
+  margin: 0;
+  margin-top: 5em;
 }
 
-input {
+input, textarea {
   outline: none;
   border: none;
   height: 4em;
   margin: .5em 1em 1em 0;
   background-color: #ECF0F1;
+  padding-left: .5em;
+  color: #808080;
+  : top;
+
 }
+
 
 .addMore {
   background-color: #2C3E50;
-  font-size: 110%
+  font-size: 110%;
   padding:.5em;
+  color: #FFF;
 }
 
 form {
@@ -187,9 +243,14 @@ form {
 
 .create {
   background-color: #27AE60;
-  font-size: 300%
+  font-size: 100%;
   padding:.5em;
-  width: 100%
+  width: 100%;
+  color: #FFF;
+  vertical-align: top;
+}
+.desc {
+
 }
 
 
