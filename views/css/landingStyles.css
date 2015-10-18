@@ -10,12 +10,13 @@ body {
 h3, h1, h2 {
 	font-weight: 300;
 	text-align: center;
+    padding: 1.5em;
 }
 
 .signin {
 	background-color: rgba(236, 240, 241, 0.3);
 	margin: 0 auto;
-    width: 30%;
+    width: 35%;
     padding: 1em;
     margin-top: 15%;
 

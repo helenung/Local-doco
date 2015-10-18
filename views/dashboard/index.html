@@ -15,13 +15,40 @@
  
    <body>
     <div id='cssmenu'>
-<ul>
-   <li class='active'><a href='#'><span>HUNTS</span></a></li>
-   <li class='last'><a href='#'><span>ADD</span></a></li>
-</ul>
-</div>
-    
+      <ul>
+         <li class='active'><a href='#'><span>HUNTS</span></a></li>
+         <li class='last'><a href='#'><span>ADD</span></a></li>
+      </ul>
+    </div>
+
+    <ul id="rounded-list">
+      <div class="status"></div>
+      <li><a href=""><h2 class="accordion-toggle">List item</h2><div class="accordion-content default">
+    <p>Cras malesuada ultrices augue molestie risus.</p>
+  </div></a></li>
+      <li><a href=""><h2 class="accordion-toggle">List item</h2><div class="accordion-content default">
+    <p>Cras malesuada ultrices augue molestie risus.</p>
+  </div></a></li><li><a href=""><h2 class="accordion-toggle">List item</h2><div class="accordion-content default">
+    <p>Cras malesuada ultrices augue molestie risus.</p>
+  </div></a></li><li><a href=""><h2 class="accordion-toggle">List item</h2><div class="accordion-content default">
+    <p>Cras malesuada ultrices augue molestie risus.</p>
+  </div></a></li><li><a href=""><h2 class="accordion-toggle">List item</h2><div class="accordion-content default">
+    <p>Cras malesuada ultrices augue molestie risus.</p>
+  </div></a></li>
+    </ul>
      
    </body>
-  
+  <script type="text/javascript">
+  $(document).ready(function($) {
+    $('#rounded-list').find('.accordion-toggle').click(function(){
+
+      //Expand or collapse this panel
+      $(this).next().slideToggle('fast');
+
+      //Hide the other panels
+      $(".accordion-content").not($(this).next()).slideUp('fast');
+
+    });
+  });
+</script>
 </html>
