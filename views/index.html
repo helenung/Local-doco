@@ -9,9 +9,8 @@
    <link rel="stylesheet" type="text/css" href="css/styles.css" media="screen" />
    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,600' rel='stylesheet' type='text/css'>
    <body id="bg-land">
-
+      <div class="logo"><img class="logo" src="img/logo.png" alt="local doco logo" /></div>
       <div class="signin">
-      	<img class="logo" src="img/logo.png">
       	<h3>Please sign in with <img class="fb" src="img/fb.png">
       	to create a new adventure.</h3>
       	<button class="login" id="login" type="button">Log in with <img class="fb" src="img/fb.png"></button>
@@ -25,31 +24,16 @@
         <div class="form">
             <form>
               <input type="text" id="huntName" placeholder="Hunt Name" />
-              <input type="text" id="desc" size="75" placeholder="Description" />
-              <div id="dynamicInput">
-              <br><input type="text" class="item" size="75" placeholder="Item 1">
-              <input class="addMore" id="addItem" type="button" value="Add More Items">
-            </div>  <input class="create" type="button" id="submitHunt" value="Create" />
+              <input type="text" id="desc" placeholder="Description" />
+              <div id="dynamicInput"></div>  
+              <input class="addMore" id="addItem" type="button" value="Add Item">
+              <input class="create" type="button" id="submitHunt" value="Create" />
             </form>
         </div>
       </div>
 
       <div id="huntsList">
-      <ul id="rounded-list">
-        <div class="status"></div>
-            <li><a href=""><h2 class="accordion-toggle">Hunt item</h2><div class="accordion-content default">
-          <p>Cras malesuada ultrices augue molestie risus.</p>
-        </div></a></li>
-            <li><a href=""><h2 class="accordion-toggle">Hunt item</h2><div class="accordion-content default">
-          <p>Cras malesuada ultrices augue molestie risus.</p>
-        </div></a></li><li><a href=""><h2 class="accordion-toggle">Hunt item</h2><div class="accordion-content default">
-          <p>Cras malesuada ultrices augue molestie risus.</p>
-        </div></a></li><li><a href=""><h2 class="accordion-toggle">Hunt item</h2><div class="accordion-content default">
-          <p>Cras malesuada ultrices augue molestie risus.</p>
-        </div></a></li><li><a href=""><h2 class="accordion-toggle">Hunt item</h2><div class="accordion-content default">
-          <p>Cras malesuada ultrices augue molestie risus.</p>
-        </div></a></li>
-      </ul>
+        <ul id="rounded-list"></ul>
       </div>
       <footer>
 </footer>

@@ -4,7 +4,7 @@
 
   var USER_ID = '';
 
-  var HUNTS = [];
+  var HUNTS;;
 
   $(function() {
 
@@ -69,36 +69,36 @@
     db.child('hunts').child(id).child('items').once('value', function(snapshot) {
       var items = snapshot.val();
       for (var i = 0; i < items.length; i++) {
-        names.push(items[i].name);
+        names.push(items[i]);
       }
     });
     return names;
   }
 
   function getHunts(userId) {
+    HUNTS = [];
     db.child('users').child(userId).child('hunts').once('value', function(snapshot) {
       huntIds = snapshot.val();
       // Array of {id: id, items: [{name: 'abc', description: 'abcde'}]}
       for (var key in huntIds) {
         if (huntIds.hasOwnProperty(key)) {
           // Lookup the item ids from hunts table
-          var items = getItemNamesFromHuntId(key);
-          HUNTS.push({
-            id: key,
-            items: items
-          });
+          getHuntNameAndItemsFromId(key);
         }
       }
-      renderHunts();
+      setTimeout(function() {
+        renderHunts();
+      }, 1500);
     });
   }
 
   function addItem() {
-    count++;
-    $("#dynamicInput").append($("<input>").attr("type", "text")
-        .attr("placeholder", "Item " + count)
-        .attr("class", "item").attr("size", "75"));
-    console.log($(".item"));
+    var itemInput = $("<input>").attr("type", "text").attr("placeholder", "Item").addClass("itemInput");
+    var scoreInput = $("<input>").attr("type", "number").attr("placeholder", "score").addClass("subInput");
+    var descInput = $("<input>").attr("type", "text").attr("placeholder", "description").addClass("subInput");
+
+    $("#dynamicInput").append(itemInput).append(scoreInput).append(descInput);
+   // getHunts(USER_ID);
   }
 
   function clearForm() {
@@ -109,6 +109,35 @@
 
   function renderHunts() {
     console.log(HUNTS);
+    $("#huntsList").hide();
+    $("#rounded-list").empty();
+
+    //var testJson = JSON.stringify(HUNTS);
+
+  //  console.log("FROM HUNTS: " + JSON.parse(testJson));
+    HUNTS.reverse().forEach(function(hunt) {
+      var id = hunt.id;
+      var name = hunt.name;
+  //    var itemsStr = "";
+  
+    //  hunt["items"].forEach(function(item) {
+     //   itemsStr += item + " ";
+     // })
+
+      var listItem = $("<li>");
+      var anchor = $("<a>").attr("href", "hunt/?huntId=" + id);
+      var heading = $("<h2>").addClass("accordion-toggle").html(name);
+    //  var itemDiv = $("<div>").addClass("accordion-content default").html("hi");
+     // console.log(itemsStr);
+      anchor.append(heading);//.append(itemDiv);
+      listItem.append(anchor);
+
+      $("#rounded-list").append(listItem);
+
+    });
+
+    $("#huntsList").show();
+
   }
 
   function addHunt() {
@@ -123,7 +152,22 @@
     huntsRef.set({name: huntName, items: itemNames});
     db.child('users').child(USER_ID).child('hunts').child(huntsRef.key()).set({set: true});
     clearForm();
-    renderHunts();
+    getHunts(USER_ID);
   }
+
+    function getHuntNameAndItemsFromId(id) {
+    var name = '';
+    var items = [];
+    db.child('hunts').child(id).once('value', function(snapshot) {
+      var hunt = snapshot.val();
+      name = hunt.name;
+      HUNTS.push({
+        id,
+        name: hunt.name,
+        items: hunt.items
+      });
+    });
+  }
+
 
 })();
