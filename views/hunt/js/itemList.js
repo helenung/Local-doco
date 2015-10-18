@@ -81,9 +81,9 @@
 
     function initListeners(){
     	$(".feedItem").click(function(){
-            var itemIndex = $(this).attr('id');
+            var itemIndex = $(this).attr('id').split(":qw:");
     		var newLocation = location.href.split("itemList.html")[0] + "itemprofile.html?random=" + huntId + ":qw:" + teamName + 
-            ":qw:" + itemIndex;
+            ":qw:" + itemIndex[0] + ":qw:" + itemIndex[1];
 
             location.href = newLocation;
         });
@@ -119,9 +119,9 @@
 
         var baseDiv;
         if(earned){
-            baseDiv = '<div id="' + id + '" class="feedItem" style="background: url(' + "'" + imgLink + "'" + ') no-repeat center center; background-size: cover;">' + '<h2>' + name + '</h2><span class="earned">+' + score + '</span></div>';
+            baseDiv = '<div id="' + id + ":qw:" + name + '" class="feedItem" style="background: url(' + "'" + imgLink + "'" + ') no-repeat center center; background-size: cover;">' + '<h2>' + name + '</h2><span class="earned">+' + score + '</span></div>';
         } else {
-            baseDiv = '<div id="' + id + '" class="feedItem"><h2>' + name + '</h2><span>+' + score + '</span></div>';
+            baseDiv = '<div id="' + id + ":qw:" + name + '" class="feedItem"><h2>' + name + '</h2><span>+' + score + '</span></div>';
         }
         $(".feed").append(baseDiv);
     }

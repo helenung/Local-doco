@@ -1,7 +1,28 @@
 (function() {
 
+	var huntId;
+	var teamName;
+	var itemIndex;
+	var itemName;
+
     window.onload = function(){
+    	initState();
     	initListeners();
+    }
+
+    function initState(){
+        var db = new Firebase('https://local-doco.firebaseio.com');
+        var url = window.location.href.split("?");
+        var params = url && url[1] ? url[1].split("=") : null;
+        temp = params && params[1] ? params[1] : null;
+
+        var urlVariables = temp.split(":qw:");
+        huntId = urlVariables[0];
+        teamName = urlVariables[1];
+        itemIndex = urlVariables[2];
+        itemName = urlVariables[3];
+
+        createItemContent(itemName,10,false);
     }
 
     function initListeners(){
@@ -12,8 +33,6 @@
     	$("#input").change(function(){
     		$(".takePicButton span").html("Processing...");
     	});
-
-    	createItemContent("bottle",40,true,'https://upload.wikimedia.org/wikipedia/commons/d/d2/Siberian_Husky_with_Blue_Eyes.jpg','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut ullamcorper orci. Sed pellentesque sapien ut nibh eleifend cursus.');
     }
 
     function createItemContent(name,points,earned,imgLink,description){
@@ -25,13 +44,11 @@
     	if(earned){
     		baseDiv = baseDiv + ' class="earned"';
     	}
-    	baseDiv = baseDiv + ">+" + points + "</span></div><p>" + description + "</p>";
+    	baseDiv = baseDiv + ">+" + points + "</span></div><p></p>";
     	$(".itemContent").append(baseDiv);
 
     	$("#topTitle").html(name);
     }
-
-
 
 
 })();
