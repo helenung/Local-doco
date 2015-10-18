@@ -37,7 +37,7 @@
               });
   	    });
 
-        var newLocation = location.href.split("index.html")[0] + "itemList.html?random=" + huntId + ":qw:" + namae;
+        var newLocation = location.href.split("hunt/")[0] + "hunt/itemList.html?random=" + huntId + ":qw:" + namae;
 
         setTimeout(function(){
           location.href = newLocation;
