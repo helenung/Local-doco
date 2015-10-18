@@ -55,9 +55,11 @@ h1,h2,h3,h4,h5 {
 
 .profileData {
 	overflow: auto;
+	padding-top: 5px;
 	padding-bottom: 5px;
 	position: fixed;
 	top: 60px;
+	background-color: #27ae60;
 }
 	.profileData .third {
 		text-align: center;
