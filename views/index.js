@@ -1,17 +1,10 @@
-'use strict';
-
 (function() {
+
   $(function() {
-    console.log('what');
     $('#login').click(function() {
       console.log('clicked');
       login();
     });
-  });
-
-  $('#login').click(function() {
-    console.log('clicked');
-    login();
   });
 
   function login() {
@@ -25,4 +18,4 @@
       }
     });
   };
-});
+})();
