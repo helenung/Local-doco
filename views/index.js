@@ -4,8 +4,10 @@
 
   var USER_ID = '';
 
+  var HUNTS = [];
+
   $(function() {
-    
+
     $("#huntsList").hide();
     $("#cssmenu").hide();
     $("#create").hide();
@@ -13,7 +15,7 @@
       console.log('clicked');
       login();
    });
-  }); 
+  });
 
   function login() {
     db.authWithOAuthPopup('facebook', function(error, authData) {
@@ -25,15 +27,20 @@
         var id = authData.uid.substring(9);
         USER_ID = id;
         checkIfUserExists(id);
-
-        $("#submitHunt").click(addHunt);
-
         getHunts(id);
+
         $(".signin").hide();
         $("#huntsList").show();
         $("#cssmenu").show();
         $("#create").show();
-        $("#addItem").click(addItem);
+        $("#addItem").click(function() {
+          console.log("Add new item");
+          addItem();
+        });
+        $("#submitHunt").click(function() {
+          console.log("Submit hunt");
+          addHunt();
+        });
 
       }
     });
@@ -87,7 +94,6 @@
   count = 1;
 
   function addItem() {
-    console.log("fuck u");
     count++;
     $("#dynamicInput").append($("<input>").attr("type", "text")
         .attr("placeholder", "Item " + count)
@@ -95,24 +101,17 @@
     console.log($(".item"));
   }
 
-  // Store huntid: [itemids...] and itemid: {name: 'abc', description: 'abcde'}
-  // items should be array of {name: 'abc', description: 'abcde'}
   function addHunt() {
     var huntName = $("#huntName").val();
     var desc = $("#desc").val();
     var items = $(".item");
-    var itemsRef = db.child('items');
-    var itemIds = [];
-    items.forEach(function(e) {
-      itemsId.push(e.val());
-    });
+    var itemNames = [];
     for (var i = 0; i < items.length; i++) {
-      var newItemRef = itemsRef.push();
-      newItemRef.set({"name": items[i].val()});
-      itemIds.push(newItemRef.key());
+      itemNames.push(items.eq(i).val());
     }
     var huntsRef = db.child('hunts').push();
-    huntsRef.set({items: itemIds});
+    huntsRef.set({name: huntName, items: itemNames});
+    debugger;
     db.child('users').child(USER_ID).child('hunts').child(huntsRef.key()).set({set: true});
   }
 
