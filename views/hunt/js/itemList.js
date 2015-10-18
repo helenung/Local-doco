@@ -1,60 +1,11 @@
 (function() {
 
-    var fakeInput = {
-        items:[
-            {id:"0001",
-             name:"Water Bottle",
-             points:20,
-             earned:false
-             },
-             {id:"0002",
-             name:"Umbrella",
-             points:10,
-             earned:true
-             },
-             {id:"0003",
-             name:"Wallet",
-             points:10,
-             earned:false
-             },
-             {id:"0004",
-             name:"Kitten",
-             points:30,
-             earned:true
-             },
-             {id:"0005",
-             name:"Husky",
-             points:30,
-             earned:false
-             }
-        ]
-    }
-
-    var fakeItems = {
-        '0001':{
-            img:'https://upload.wikimedia.org/wikipedia/commons/0/07/Multi-use_water_bottle.JPG'
-        },
-        '0002':{
-            img:'http://ak.picdn.net/shutterstock/videos/2624345/preview/stock-footage-umbrella-on-the-road-under-rain.jpg'
-        },
-        '0003':{
-            img:'https://s-media-cache-ak0.pinimg.com/736x/43/bf/a4/43bfa44e28e6badab50c614cf72004b5.jpg'
-        },
-        '0004':{
-            img:'http://images4.fanpop.com/image/photos/16100000/Cute-Kitten-kittens-16123796-1280-800.jpg'
-        },
-        '0005':{
-            img:'https://upload.wikimedia.org/wikipedia/commons/d/d2/Siberian_Husky_with_Blue_Eyes.jpg'
-        }
-    }
-
     var huntId;
     var teamName;
 
     window.onload = function(){
         initState();
         // loadItems();
-        
     }
 
     function initState(){
@@ -68,14 +19,16 @@
         teamName = urlVariables[1];
         console.log("Hunt Id: " + huntId + " // Team Name: " + teamName);
         db.child('hunts').child(huntId).child('items').once('value', function(snapshot) {
-            var items = snapshot.val();
-            console.log("Items!" + items);
-            for (var i = 0; i < items.length; i++) {
-                //items.push(snapshot.val());
-                console.log(items[i]);
-                addItem(i,items[i],10,false);
-            }
-            initListeners();
+            var possibleItems = snapshot.val();
+
+            db.child('hunts').child(huntId).child('teams').child(teamName).child('items').once('value', function(snapshot) {
+                var itemStatus = snapshot.val();
+                for (var i = 0; i < possibleItems.length; i++) {
+                    //items.push(snapshot.val());
+                    addItem(i,possibleItems[i],10,itemStatus[i]);
+                }
+                initListeners();
+            });
         });
     }
 
@@ -83,7 +36,7 @@
     	$(".feedItem").click(function(){
             var itemIndex = $(this).attr('id').split(":qw:");
     		var newLocation = location.href.split("itemList.html")[0] + "itemprofile.html?random=" + huntId + ":qw:" + teamName + 
-            ":qw:" + itemIndex[0] + ":qw:" + itemIndex[1];
+            ":qw:" + itemIndex[0] + ":qw:" + itemIndex[1] + ":qw:" + itemIndex[2];
 
             location.href = newLocation;
         });
@@ -119,7 +72,7 @@
 
         var baseDiv;
         if(earned){
-            baseDiv = '<div id="' + id + ":qw:" + name + '" class="feedItem" style="background: url(' + "'" + imgLink + "'" + ') no-repeat center center; background-size: cover;">' + '<h2>' + name + '</h2><span class="earned">+' + score + '</span></div>';
+            baseDiv = '<div id="' + id + ":qw:" + name + ":qw:" + earned + '" class="feedItem" style="background: url(' + "'" + "http://lorempixel.com/400/200/" + "'" + ') no-repeat center center; background-size: cover;">' + '<h2>' + name + '</h2><span class="earned">+' + score + '</span></div>';
         } else {
             baseDiv = '<div id="' + id + ":qw:" + name + '" class="feedItem"><h2>' + name + '</h2><span>+' + score + '</span></div>';
         }

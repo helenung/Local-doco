@@ -75,6 +75,18 @@
 		}
 
 		function processResults(results){
+			var db = new Firebase('https://local-doco.firebaseio.com');
+	        var url = window.location.href.split("?");
+	        var params = url && url[1] ? url[1].split("=") : null;
+	        temp = params && params[1] ? params[1] : null;
+
+	        var urlVariables = temp.split(":qw:");
+	        huntId = urlVariables[0];
+	        teamName = urlVariables[1];
+	        itemIndex = urlVariables[2];
+	        itemName = urlVariables[3];
+	        earned = urlVariables[4];
+	        
 	    	console.log($("#topTitle").html());
 	    	console.log(results);
 	    	// Go through classes (keywords) and see if any match with our key word
@@ -94,6 +106,9 @@
 		    	}
 		    }
 		    if(found){
+		    	db.child('hunts').child(huntId).child('teams').child(teamName).child('items').update({
+					[itemIndex]:true
+				});
 		    	$("#successPage").css('display','block');
 		    	$( "#successPage" ).animate({
 				    fontSize: '100pt'

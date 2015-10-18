@@ -4,6 +4,7 @@
 	var teamName;
 	var itemIndex;
 	var itemName;
+	var earned;
 
     window.onload = function(){
     	initState();
@@ -21,13 +22,15 @@
         teamName = urlVariables[1];
         itemIndex = urlVariables[2];
         itemName = urlVariables[3];
+        earned = urlVariables[4];
 
-        createItemContent(itemName,10,false);
+        createItemContent(itemName,10,earned);
     }
 
     function initListeners(){
     	$(".backButton").click(function(){
-    		location.href = location.href.replace('/itemprofile.html','') + "/itemList.html";
+    		var newLocation = location.href.split("itemprofile.html")[0] + "itemList.html?random=" + huntId + ":qw:" + teamName;
+            location.href = newLocation;
     	});
 
     	$("#input").change(function(){
@@ -35,13 +38,13 @@
     	});
     }
 
-    function createItemContent(name,points,earned,imgLink,description){
+    function createItemContent(name,points,earned){
     	var baseDiv = '<div class="headerImage"';
-    	if(earned){
-    		baseDiv = baseDiv + 'style="background: url(' + "'" + imgLink + "'" + ') no-repeat center center; background-size: cover;"';
+    	if(earned == "true"){
+    		baseDiv = baseDiv + 'style="background: url(' + "'" + "http://lorempixel.com/400/200/" + "'" + ') no-repeat center center; background-size: cover;"';
     	}
     	baseDiv = baseDiv + '><h2>' + name + '</h2><span';
-    	if(earned){
+    	if(earned == "true"){
     		baseDiv = baseDiv + ' class="earned"';
     	}
     	baseDiv = baseDiv + ">+" + points + "</span></div><p></p>";
@@ -49,6 +52,5 @@
 
     	$("#topTitle").html(name);
     }
-
 
 })();
