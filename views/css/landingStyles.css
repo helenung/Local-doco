@@ -10,15 +10,15 @@ body {
 h3, h1, h2 {
 	font-weight: 300;
 	text-align: center;
-    padding: 1.5em;
 }
 
 .signin {
 	background-color: rgba(236, 240, 241, 0.3);
 	margin: 0 auto;
-    width: 35%;
-    padding: 1em;
-    margin-top: 15%;
+      width: 35%;
+      padding: 1em;
+      margin-top: 15%;
+      border-radius: 4px;
 
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 2s; /* Firefox < 16 */
@@ -56,6 +56,10 @@ h3, h1, h2 {
     to   { opacity: 1; }
 }
 
+.signin h3 {
+    margin-top: 0px;
+  }
+
 button {
 	background-color: #2ECC71;
 	color: #FFF;
@@ -80,8 +84,8 @@ footer {
 	padding: 0 0 0 1em;
 }
 
-.logo {
-    width: 100%;
+#logo {
+    width: 40em;
     text-align: center;
     margin: 0 auto;
 }
