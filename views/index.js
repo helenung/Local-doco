@@ -18,19 +18,17 @@
         var id = authData.uid.substring(9);
 
         checkIfUserExists(id);
-        
+        getHunts(id);
       }
     });
   };
 function userExistsCallback(userId, exists) {
   if (exists) {
-    alert('user ' + userId + ' exists!');
   } else {
-    alert('user ' + userId + ' does not exist!');
     var usersRef = db.child("users");
         
         usersRef.child(userId).set({
-          id:userId
+          score:0
         });
   }
 }
@@ -40,6 +38,12 @@ function checkIfUserExists(userId) {
   db.child('users').child(userId).once('value', function(snapshot) {
     var exists = (snapshot.val() !== null);
     userExistsCallback(userId, exists);
+  });
+}
+
+function getHunts(userId) {
+  db.child('users').child(userId).child('Hunts').once('value', function(snapshot) {
+    console.log(snapshot.val() + " was  meters tall");
   });
 }
 
