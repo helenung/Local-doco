@@ -1,0 +1,21 @@
+.takePicButton {
+	height: 30vh;
+	background-color: #2ecc71;
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+	text-align: center;
+	color: white;
+	text-transform: uppercase;
+	letter-spacing: 10px;
+	line-height: 30vh;
+	font-weight: 600;
+}
+
+.itemContent {
+	padding-top: 60px;
+}
+
+.headerImage {
+	height: 20vh;
+}
