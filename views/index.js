@@ -95,7 +95,8 @@
     function clearForm() {
         $('#huntName').val('');
         $('#desc').val('');
-        $('.item').val('');
+        $('.subInput').val('');
+        $('.itemInput').val('');
     }
 
     function renderHunts() {
