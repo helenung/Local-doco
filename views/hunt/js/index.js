@@ -2,12 +2,34 @@
     console.log("hi");
     var db = new Firebase('https://local-doco.firebaseio.com');
 
+    var HUNTS = [];
+
+    function setHuntHeader(name) {
+      $("#huntName").html(name);
+    }
+
+    function getHuntName(id) {
+      var name;
+      db.child('hunts').child(id).once('value', function(snapshot) {
+          var hunt = snapshot.val();
+          setHuntHeader(hunt.name);
+      });
+      
+    }
+
+    
+
     $( document ).ready(function() {
       // Handler for .ready() called.
+      var url = window.location.href.split("?");
+      var params = url && url[1] ? url[1].split("=") : null;
+      var huntId = params && params[1] ? params[1] : null;
+
+      var huntName = getHuntName(huntId)
+      console.log(huntName);
+
       $( "#startButton" ).click(function() {
-       	var url = window.location.href.split("?");
-      	var params = url && url[1] ? url[1].split("=") : null;
-      	huntId = params && params[1] ? params[1] : null;
+       	
 
       	namae = $("#name").val();
       	console.log(huntId+ " "+ namae);

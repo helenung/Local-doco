@@ -2,7 +2,28 @@ body {
 	background: url('../img/bg.jpeg') no-repeat center center fixed;
 	background-size: cover;
 	color: white;
-	margin-top: 20vh;
+	margin-top: 0px;
+	
+}
+
+@media screen and (max-width: 500px) {
+    .logo {
+        width: 15em;
+        text-align: center;
+        margin: 0 auto;
+        margin-top: 0px;
+    }
+}
+
+#huntName {
+	margin-top: 1em;
+}
+
+.logo {
+    width: 35em;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0px;
 }
 
 h1,h3,span {
