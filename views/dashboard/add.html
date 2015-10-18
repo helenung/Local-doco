@@ -30,12 +30,16 @@
           <input type="text" placeholder="Hunt Name" />
           <input type="text" size="75" placeholder="Description" />
           <div id="dynamicInput">
-          <br><input type="text" size="75" placeholder="Item 1" name="myInputs[]">
-     
+          <br><input type="text" size="45" placeholder="Item 1" name="myInputs[]">
+<textarea class="desc" placeholder="Description" rows="3" cols="45" name="myInputs[]"></textarea>
      <input class="addMore" type="button" value="Add More Items" onClick="addInput('dynamicInput');">
-        </div>  <input class="create" type="submit" value="Create" />
+        </div>  <input class="create" type="submit" value="Create" onclick="myFunction()"/>
         </form>
+        <h3 id="confirm"></h3>
       </div>
+
+
+
    </body>
    <script type="text/javascript">
    var counter = 1;
@@ -46,9 +50,20 @@ function addInput(divName){
      }
      else {
           var newdiv = document.createElement('div');
-          newdiv.innerHTML = "<br><input type='text' size='75' placeholder='Item " + (counter + 1) + "' name='myInputs[]'>";
+          newdiv.innerHTML = "<br><input type='text' size='45' placeholder='Item " + (counter + 1) + "' name='myInputs[]'> <textarea placeholder='Description' rows='3' cols='45' name='myInputs[]'>";
           document.getElementById(divName).appendChild(newdiv);
           counter++;
      }
-}</script>
+}
+
+function myFunction() {
+
+    alert("Congrats! Your new adventure is now online.");
+
+}
+
+
+
+
+</script>
 </html>
