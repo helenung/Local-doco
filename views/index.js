@@ -143,13 +143,19 @@
   function addHunt() {
     var huntName = $("#huntName").val();
     var desc = $("#desc").val();
+
     var items = $(".item");
+    console.log("all items: " + items);
     var itemNames = [];
-    for (var i = 0; i < items.length; i++) {
-      itemNames.push(items.eq(i).val());
-    }
+    items.forEach(function(item) {
+      console.log(item);
+      itemNames.push(item.val());
+    })
+    // for (var i = 0; i < items.length; i++) {
+    //   itemNames.push(items.eq(i).val());
+    // }
     var huntsRef = db.child('hunts').push();
-    huntsRef.set({name: huntName, items: itemNames});
+    huntsRef.set({"name": huntName, "items": itemNames});
     db.child('users').child(USER_ID).child('hunts').child(huntsRef.key()).set({set: true});
     clearForm();
     getHunts(USER_ID);
