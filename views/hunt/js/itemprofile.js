@@ -6,7 +6,7 @@
 
     function initListeners(){
     	$(".backButton").click(function(){
-    		location.href = location.href.replace('/itemprofile.html','') + "/index.html";
+    		location.href = location.href.replace('/itemprofile.html','') + "/itemList.html";
     	});
     }
 

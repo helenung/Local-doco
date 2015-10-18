@@ -7,7 +7,7 @@
 
     function initListeners(){
         $("#itemListNav").click(function(){
-            location.href = location.href.replace('/leaderboard.html','') + "/index.html";
+            location.href = location.href.replace('/leaderboard.html','') + "/itemList.html";
         });
     }
 

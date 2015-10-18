@@ -6,11 +6,11 @@
 
     function initListeners(){
     	$(".feedItem").click(function(){
-    		location.href = location.href.replace('/index.html','') + "/itemprofile.html";
+    		location.href = location.href.replace('/itemList.html','') + "/itemprofile.html";
     	});
 
     	$("#leaderNav").click(function(){
-    		location.href = location.href.replace('/index.html','') + "/leaderboard.html";
+    		location.href = location.href.replace('/itemList.html','') + "/leaderboard.html";
     	});
     }
 
