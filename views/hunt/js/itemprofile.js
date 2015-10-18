@@ -5,6 +5,7 @@
 	var itemIndex;
 	var itemName;
 	var earned;
+	var db = new Firebase('https://local-doco.firebaseio.com');
 
     window.onload = function(){
     	initState();
@@ -12,7 +13,6 @@
     }
 
     function initState(){
-        var db = new Firebase('https://local-doco.firebaseio.com');
         var url = window.location.href.split("?");
         var params = url && url[1] ? url[1].split("=") : null;
         temp = params && params[1] ? params[1] : null;
@@ -41,16 +41,30 @@
     function createItemContent(name,points,earned){
     	var baseDiv = '<div class="headerImage"';
     	if(earned == "true"){
-    		baseDiv = baseDiv + 'style="background: url(' + "'" + "http://lorempixel.com/400/200/" + "'" + ') no-repeat center center; background-size: cover;"';
-    	}
-    	baseDiv = baseDiv + '><h2>' + name + '</h2><span';
-    	if(earned == "true"){
-    		baseDiv = baseDiv + ' class="earned"';
-    	}
-    	baseDiv = baseDiv + ">+" + points + "</span></div><p></p>";
-    	$(".itemContent").append(baseDiv);
+    		db.child('hunts').child(huntId).child('teams').child(teamName).child('pics').once('value', function(snapshot) {
+    			var possiblePics = snapshot.val();
+	            imgLink = possiblePics[itemIndex];
+	    		baseDiv = baseDiv + 'style="background: url(' + "'" + imgLink + "'" + ') no-repeat center center; background-size: cover;"';
 
-    	$("#topTitle").html(name);
+	    		baseDiv = baseDiv + '><h2>' + name + '</h2><span';
+		    	baseDiv = baseDiv + ' class="earned"';
+		    	baseDiv = baseDiv + ">+" + points + "</span></div><p></p>";
+		    	$(".itemContent").append(baseDiv);
+
+		    	$("#topTitle").html(name);
+	    	});
+            
+    	} else {
+    		baseDiv = baseDiv + '><h2>' + name + '</h2><span';
+	    	if(earned == "true"){
+	    		baseDiv = baseDiv + ' class="earned"';
+	    	}
+	    	baseDiv = baseDiv + ">+" + points + "</span></div><p></p>";
+	    	$(".itemContent").append(baseDiv);
+
+	    	$("#topTitle").html(name);
+    	}
+    	
     }
 
 })();
