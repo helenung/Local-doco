@@ -5,17 +5,20 @@
   var USER_ID = '';
 
   $(function() {
-    $('#login').click(function() {
+    $("#huntsList").hide();
+    $("#cssmenu").hide();
+    $("#login").click(function() {
       console.log('clicked');
       login();
     });
-  });
+  }); 
 
   function login() {
     db.authWithOAuthPopup('facebook', function(error, authData) {
       if (error) {
         console.log('Login Failed!', error);
       } else {
+        $("#loginDiv").hide();
         console.log('User data:', authData);
         var id = authData.uid.substring(9);
         USER_ID = id;
@@ -25,6 +28,9 @@
           description: 'a fucking apple'
         }]);
         getHunts(id);
+        $(".signin").hide();
+        $("#huntsList").show();
+        $("#cssmenu").show();
       }
     });
   };

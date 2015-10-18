@@ -2,13 +2,20 @@
 <html>
    <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/landingStyles.css" media="screen" />
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,600' rel='stylesheet' type='text/css'>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
     <!-- Latest compiled and minified JavaScript -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="../index.js" type="text/javascript"></script>
+
       <title>Local Doco</title>
    </head>
      <link rel="stylesheet" type="text/css" href="../css/styles.css" media="screen" />
@@ -21,21 +28,31 @@
       </ul>
     </div>
 
+    <div class="signin">
+      <img class="logo" src="../img/logo.png">
+      <h3>Please sign in with <img class="fb" src="../img/fb.png">
+      to create a new adventure.</h3>
+      <button class="login" id="login" type="button">Log in with <img class="fb" src="../img/fb.png"></button>
+
+    </div>
+
+    <div id="huntsList">
     <ul id="rounded-list">
       <div class="status"></div>
-      <li><a href=""><h2 class="accordion-toggle">List item</h2><div class="accordion-content default">
-    <p>Cras malesuada ultrices augue molestie risus.</p>
-  </div></a></li>
-      <li><a href=""><h2 class="accordion-toggle">List item</h2><div class="accordion-content default">
-    <p>Cras malesuada ultrices augue molestie risus.</p>
-  </div></a></li><li><a href=""><h2 class="accordion-toggle">List item</h2><div class="accordion-content default">
-    <p>Cras malesuada ultrices augue molestie risus.</p>
-  </div></a></li><li><a href=""><h2 class="accordion-toggle">List item</h2><div class="accordion-content default">
-    <p>Cras malesuada ultrices augue molestie risus.</p>
-  </div></a></li><li><a href=""><h2 class="accordion-toggle">List item</h2><div class="accordion-content default">
-    <p>Cras malesuada ultrices augue molestie risus.</p>
-  </div></a></li>
+          <li><a href=""><h2 class="accordion-toggle">Hunt item</h2><div class="accordion-content default">
+        <p>Cras malesuada ultrices augue molestie risus.</p>
+      </div></a></li>
+          <li><a href=""><h2 class="accordion-toggle">Hunt item</h2><div class="accordion-content default">
+        <p>Cras malesuada ultrices augue molestie risus.</p>
+      </div></a></li><li><a href=""><h2 class="accordion-toggle">Hunt item</h2><div class="accordion-content default">
+        <p>Cras malesuada ultrices augue molestie risus.</p>
+      </div></a></li><li><a href=""><h2 class="accordion-toggle">Hunt item</h2><div class="accordion-content default">
+        <p>Cras malesuada ultrices augue molestie risus.</p>
+      </div></a></li><li><a href=""><h2 class="accordion-toggle">Hunt item</h2><div class="accordion-content default">
+        <p>Cras malesuada ultrices augue molestie risus.</p>
+      </div></a></li>
     </ul>
+    </div>
      
    </body>
   <script type="text/javascript">

@@ -23,7 +23,11 @@
 
 	// temporary hard-coded item values
 	var items = {
-		"1": "friends at dubHacks"
+		"1": { 
+			"name": "friends at dubHacks",
+			"points": 10,
+			"description": ""
+		}
 	};
 
 	// temporary hard-coded team values
@@ -71,21 +75,28 @@
 			var submissions = [{
 				"itemId": 1,
 				"teamId": 1,
+				"times": "1pm",
 				"imageURL": "https://scontent.xx.fbcdn.net/hphotos-xpt1/v/t1.0-9/12096342_10208151240163120_4798659760476493939_n.jpg?oh=93c99f773335edf414ee05405551d5c0&oe=56CF3D42"
 			}, {
 				"itemId": 1,
 				"teamId": 2,
+				"times": "2pm",
 				"imageURL": "https://scontent.xx.fbcdn.net/hphotos-xpt1/v/t1.0-9/12112104_10153256723648741_5486616484579004564_n.jpg?oh=af4e2fb781fbad38633a71ea84172626&oe=56BED77F"
 			}];
 
 			submissions.forEach(function(submission) {
+				var itemBar = $("<div>").addClass("itemBar");
 				var teamId = submission.teamId;
 				var itemId = submission.itemId;
 				var image = submission.imageURL;
 				var img = $("<img>").attr("src", image).addClass("feedImg");
-				var item = $("<div>").html(teams[teamId] + " found " + items[itemId] + "!").addClass("itemBar");
-				item.append(img);
-				$("#feed").append(item);
+				var caption = $("<div>").addClass("caption");
+				var teamName = $("<div>").html(teams[teamId]).addClass("teamName");
+				var points = $("<div>").html("+" + items[submission.itemId].points).addClass("points");
+				var time = $("<div>").html(submission.times).addClass("time");
+				caption.append(teamName).append(points).append(time);
+				itemBar.append(caption).append(img);
+				$("#feed").append(itemBar);
 				
 			})
 		}
