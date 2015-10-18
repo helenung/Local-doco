@@ -1,0 +1,35 @@
+h1 {
+	padding-top: 80px;
+	text-align: center;
+	font-size: 17pt;
+}
+
+.timer {
+	text-align: center;
+	display: block;
+}
+
+.leaderboard {
+	margin-top: 20px;
+}
+
+.rank {
+	padding: 12px;
+}
+
+.whiteBg {
+	background-color: white;
+}
+
+.pointCol {
+	float: right;
+}
+
+.teamNameCol {
+	display: inline-block;
+	padding-left: 20px;
+}
+
+.rankNum {
+	font-weight: 600;
+}

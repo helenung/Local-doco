@@ -17,5 +17,41 @@
 }
 
 .headerImage {
-	height: 20vh;
+	background: #95a5a6;
+	height: 30vh;
+	position: relative;
+	color: white;
+	text-shadow: 1px 1px 10px rgba(150, 150, 150, 1);
+}
+	.headerImage h2 {
+		position: absolute;
+		bottom: 5px;
+		left: 10px;
+	}
+
+	.headerImage span {
+		position: absolute;
+		bottom: 5px;
+		right: 5px;
+		float: right;
+		text-align: right;
+		margin-right: 10px;
+		border-radius: 50%;
+	    width: 23px;
+	    height: 23px;
+	    padding: 8px;
+	    padding-right: 12px;
+	    padding-left: 5px;
+	    color: white;
+	    text-align: center;
+	}
+
+	.headerImage .earned {
+		background:rgba(46,204,113,0.7);
+		color: white;
+	}
+
+.itemContent p {
+	padding-left: 10px;
+	padding-right: 10px;
 }
