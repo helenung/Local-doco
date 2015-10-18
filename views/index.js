@@ -13,8 +13,7 @@
       if (error) {
         console.log("Login Failed!", error);
       } else {
-        console.log("Authenticated successfully with payload:", authData);
-        window.location = '/dashboard';
+        console.log("User data:", authData);
       }
     });
   };
