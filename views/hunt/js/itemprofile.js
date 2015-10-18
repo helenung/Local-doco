@@ -13,7 +13,7 @@
     		$(".takePicButton span").html("Processing...");
     	});
 
-    	createItemContent("umbrella",40,true,'https://upload.wikimedia.org/wikipedia/commons/d/d2/Siberian_Husky_with_Blue_Eyes.jpg','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut ullamcorper orci. Sed pellentesque sapien ut nibh eleifend cursus.');
+    	createItemContent("bottle",40,true,'https://upload.wikimedia.org/wikipedia/commons/d/d2/Siberian_Husky_with_Blue_Eyes.jpg','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut ullamcorper orci. Sed pellentesque sapien ut nibh eleifend cursus.');
     }
 
     function createItemContent(name,points,earned,imgLink,description){
