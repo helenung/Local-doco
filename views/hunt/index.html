@@ -2,8 +2,8 @@
 	<head>
 		<title>Loco Doco</title>
 		<meta name="viewport" content="width=device-width">
-
         <!-- Fonts  -->
+           <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
 
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
@@ -17,7 +17,8 @@
 		<!-- Scripts  -->
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="../index.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+
 	</head>
 	<body>
 		<h1>Explore UW</h1>
@@ -26,9 +27,9 @@
 		<div class="bottomSection">
 			<p>Team Name</p>
 			<div class="inputArea">
-				<input type="text" placeholder="Write team name...">
+				<input type="text" id="name" placeholder="Write team name...">
 			</div>
-			<div id="startButton">Start</div>
+			<div id="startButton" >Start</div>
 		</div>
 	</body>
 </html>
