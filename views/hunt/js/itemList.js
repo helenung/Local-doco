@@ -45,44 +45,83 @@
         },
         '0005':{
             img:'https://upload.wikimedia.org/wikipedia/commons/d/d2/Siberian_Husky_with_Blue_Eyes.jpg'
-        },
+        }
     }
 
+    var huntId;
+    var teamName;
+
     window.onload = function(){
-        loadItems();
-        initListeners();
+        initState();
+        // loadItems();
+        
+    }
+
+    function initState(){
+        var db = new Firebase('https://local-doco.firebaseio.com');
+        var url = window.location.href.split("?");
+        var params = url && url[1] ? url[1].split("=") : null;
+        temp = params && params[1] ? params[1] : null;
+
+        var urlVariables = temp.split(":qw:");
+        huntId = urlVariables[0];
+        teamName = urlVariables[1];
+        console.log("Hunt Id: " + huntId + " // Team Name: " + teamName);
+        db.child('hunts').child(huntId).child('items').once('value', function(snapshot) {
+            var items = snapshot.val();
+            console.log("Items!" + items);
+            for (var i = 0; i < items.length; i++) {
+                //items.push(snapshot.val());
+                console.log(items[i]);
+                addItem(i,items[i],10,false);
+            }
+            initListeners();
+        });
     }
 
     function initListeners(){
     	$(".feedItem").click(function(){
-    		location.href = location.href.replace('/itemList.html','') + "/itemprofile.html";
-    	});
+            var itemIndex = $(this).attr('id');
+    		var newLocation = location.href.split("itemList.html")[0] + "itemprofile.html?random=" + huntId + ":qw:" + teamName + 
+            ":qw:" + itemIndex;
+
+            location.href = newLocation;
+        });
 
     	$("#leaderNav").click(function(){
     		location.href = location.href.replace('/itemList.html','') + "/leaderboard.html";
     	});
     }
 
-    function loadItems(){
-        var items = fakeInput.items;
-        for(var i = 0; i < items.length; i++){
-            var itemName = items[i].name;
-            var itemPoints = items[i].points;
-            var earned = items[i].earned;
-            if(earned){
-                addItem(itemName,itemPoints,earned,fakeItems[items[i].id].img)
-            } else {
-                addItem(itemName,itemPoints,earned);
-            }
-        }
-    }
+    // function loadItems(){
+    //     var items = fakeInput.items;
+    //     for(var i = 0; i < items.length; i++){
+    //         var itemName = items[i].name;
+    //         var itemPoints = items[i].points;
+    //         var earned = items[i].earned;
+    //         if(earned){
+    //             addItem(itemName,itemPoints,earned,fakeItems[items[i].id].img)
+    //         } else {
+    //             addItem(itemName,itemPoints,earned);
+    //         }
+    //     }
+    // }
 
-    function addItem(name,score,earned,imgLink){
+    function addItem(id,name,score,earned,imgLink){
+        // ---- Code 
+        // var baseDiv;
+        // if(earned){
+        //     baseDiv = '<div class="feedItem" style="background: url(' + "'" + imgLink + "'" + ') no-repeat center center; background-size: cover;">' + '<h2>' + name + '</h2><span class="earned">+' + score + '</span></div>';
+        // } else {
+        //     baseDiv = '<div class="feedItem"><h2>' + name + '</h2><span>+' + score + '</span></div>';
+        // }
+        // $(".feed").append(baseDiv);
+
         var baseDiv;
         if(earned){
-            baseDiv = '<div class="feedItem" style="background: url(' + "'" + imgLink + "'" + ') no-repeat center center; background-size: cover;">' + '<h2>' + name + '</h2><span class="earned">+' + score + '</span></div>';
+            baseDiv = '<div id="' + id + '" class="feedItem" style="background: url(' + "'" + imgLink + "'" + ') no-repeat center center; background-size: cover;">' + '<h2>' + name + '</h2><span class="earned">+' + score + '</span></div>';
         } else {
-            baseDiv = '<div class="feedItem"><h2>' + name + '</h2><span>+' + score + '</span></div>';
+            baseDiv = '<div id="' + id + '" class="feedItem"><h2>' + name + '</h2><span>+' + score + '</span></div>';
         }
         $(".feed").append(baseDiv);
     }
