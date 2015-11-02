@@ -41,6 +41,24 @@
 		</div>
 	</body>
 	<script>
+	var accessToken;
+			
+		    var data = {
+		        'grant_type': 'client_credentials',
+		        'client_id': '44AYRGzIplqUvwYBO_h4dfVnoWjQNo2232MTFONR',
+		        'client_secret': 'NTFW_fqExEgT8bQvxtaJeUvJXVNHfyw6Ss6AnGs0'
+		    }
+		    $.ajax(
+		        {
+		            'type': 'POST',
+		            'url':  'https://api.clarifai.com/v1/token/',
+		            'data': data
+		        }
+		    ).done(function(json){
+			        processToken(json);
+			    })	;
+		
+
 		var db = new Firebase('https://local-doco.firebaseio.com');
         var url = window.location.href.split("?");
         var params = url && url[1] ? url[1].split("=") : null;
@@ -77,7 +95,7 @@
 			            'url': 'https://api.clarifai.com/v1/tag/',
 			            'data':JSON.stringify(data),
 			            'headers': {
-			                'Authorization': 'Bearer ' + 'QkiJkiLeCyumAdjlTMsKL9D5Ppriuu'
+			                'Authorization': 'Bearer ' + accessToken
 			            }
 			        }  
 			    ).done(function(json){
@@ -131,6 +149,11 @@
 		    	$(".takePicButton span").html("Picture not qualified :(<br>Tap to re-take photo");
 		    	
 		    }
+	    }
+
+	    function processToken(json){
+	    	accessToken = json.access_token;
+	    	console.log(accessToken);
 	    }
 	</script>
 </html>

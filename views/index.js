@@ -80,7 +80,7 @@
             }
             setTimeout(function() {
                 renderHunts();
-            }, 1500);
+            }, 2500);
         });
     }
 
